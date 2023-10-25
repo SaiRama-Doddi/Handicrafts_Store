@@ -1,0 +1,3 @@
+//Signout to the home page
+If(!IsBlank(lVarSelUser),Navigate(scrHmPage);Set(lVarSelUser,Blank()));UpdateContext({ShowPopUp:false});
+Clear(colProductOrder);
