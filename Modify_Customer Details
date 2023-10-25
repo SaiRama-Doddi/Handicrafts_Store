@@ -1,0 +1,32 @@
+//view the customer details
+//form-Datasource(users)
+With(
+    {
+     CollAllItems:Sort(Filter('User Details',txtInputSrchDetails.Text in 'Email ID'Or txtInputSrchDetails.Text in 'User ID'Or txtInputSrchDetails.Text in 'First Name' Or txtInputSrchDetails.Text in 'Last Name' Or txtInputSrchDetails.Text in 'Contact No' Or txtInputSrchDetails.Text in Address),'User ID',SortOrder.Descending)
+         
+    },
+    ForAll(
+            Sequence(CountRows(CollAllItems)),
+            Patch(
+                Last(
+                    FirstN(
+                          CollAllItems,
+                             Value
+                )
+                ),
+                {rowNum: Value}
+            )
+        )
+)
+
+//Edit the details
+//form(items property)
+LookUp('User Details','User ID'=lVarUserDet.'User ID')
+
+
+//Icon-Onselect Property
+SubmitForm(frmUserDet);
+
+//Delete Particular user details
+RemoveIf('User Details','User ID'=galUserDet.Selected.'User ID');
+Notify("Record Deleted Successfully
