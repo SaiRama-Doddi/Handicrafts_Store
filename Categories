@@ -1,0 +1,5 @@
+Navigate(
+    scrProducts,
+    ScreenTransition.Cover,
+    {lVarSel: ThisItem}
+)
