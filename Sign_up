@@ -18,4 +18,5 @@ If(
         }
     );
     Notify("Register Successfully.", NotificationType.Success, 2000),Notify("Already Registered with same Email Or Phone N0.", NotificationType.Warning));
+//for resetting the label controls
 Reset(txtFirstName);Reset(txtLastName);Reset(txtEmailId);Reset(txtPwd);Reset(txtConfirmPwd);Reset(txtContactNo);Reset(drpState);Reset(txtAddress);
