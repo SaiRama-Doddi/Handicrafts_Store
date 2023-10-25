@@ -1,0 +1,31 @@
+//Displays the products with alternate colors
+
+With(
+    {
+     CollAllItems:Filter('Product Details',If(And(! IsBlank(drpCatType.Selected.Value),!IsBlank(txtPrdSrch.Text)),And(Category=drpCatType.Selected.Value,Or(txtPrdSrch.Text in 'Product Name')),If(! IsBlank(drpCatType.Selected.Value),Category=drpCatType.Selected.Value,If(!IsBlank(txtPrdSrch.Text in 'Product Name'),true))))
+         
+    },
+    ForAll(
+            Sequence(CountRows(CollAllItems)),
+            Patch(
+                Last(
+                    FirstN(
+                          CollAllItems,
+                             Value
+                )
+                ),
+                {rowNum: Value}
+            )
+        )
+)
+
+
+//Delete the product
+RemoveIf('Product Details','Product Name'=galEditPrd.Selected.'Product Name');
+Notify("Record Deleted successfully",ScreenTransition.None)
+
+//Edit the product-icon(onslect property)
+ResetForm(frmProducts);EditForm(frmProducts);
+
+//Add new Product-icon(onselect property)
+ResetForm(frmProducts);NewForm(frmProducts);Set(varGalDefault,Blank());Set(varGalDefault,{})
