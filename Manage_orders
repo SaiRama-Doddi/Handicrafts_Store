@@ -1,0 +1,30 @@
+//Admin can view the Items purchased by the Customer
+//Gallery-Items Property
+With(
+    {
+        CollAllItems: Sort(
+            Filter(
+                Orders,
+                txtInputSrchOrders.Text in 'Product Name' Or txtInputSrchOrders.Text in 'Ord ID' Or txtInputSrchOrders.Text in 'User ID '.'User ID' Or txtInputSrchOrders.Text in 'User ID '.'First Name' Or txtInputSrchOrders.Text in Address
+            ),
+            'Order ID All',
+            SortOrder.Descending
+        )
+    },
+    ForAll(
+        Sequence(CountRows(CollAllItems)),
+        Patch(
+            Last(
+                FirstN(
+                    CollAllItems,
+                    Value
+                )
+            ),
+            {rowNum: Value}
+        )
+    )
+)
+
+//Admin can view the Items purchased by the Customer based Customer_Id
+//Gallery-Items Property
+Distinct('Order Purchases','User ID'.'User ID')
