@@ -1,0 +1,21 @@
+If(
+    IsBlank(
+        LookUp('User Details', 'Email ID' = txtEmailId.Text || 'Contact No' = txtContactNo.Text)
+    ),
+    Patch(
+        'User Details',
+        Defaults('User Details'),
+        {
+            'First Name': txtFirstName.Text,
+            'Last Name': txtLastName.Text,
+            'Email ID': txtEmailId.Text,
+            Password: txtPwd.Text,
+            State: drpState.Selected.Value,
+            'Confirm Password': txtConfirmPwd.Text,
+            'Contact No': Value(txtContactNo.Text),
+            Address: txtAddress.Text,
+            'User Type': Dropdown2.Selected.Value 
+        }
+    );
+    Notify("Register Successfully.", NotificationType.Success, 2000),Notify("Already Registered with same Email Or Phone N0.", NotificationType.Warning));
+Reset(txtFirstName);Reset(txtLastName);Reset(txtEmailId);Reset(txtPwd);Reset(txtConfirmPwd);Reset(txtContactNo);Reset(drpState);Reset(txtAddress);
