@@ -1,0 +1,1 @@
+LookUp('User Details','User ID'=lVarSelUser.'User ID')
