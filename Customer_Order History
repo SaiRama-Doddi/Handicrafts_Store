@@ -1,0 +1,3 @@
+
+//Gallery-Items Property
+Sort(Filter(Orders,'User ID '.'Email ID'=lVarSelUser.'Email ID'),SortOrder.Ascending)
