@@ -1,0 +1,42 @@
+UpdateContext(
+    {
+       lVarOrd: Patch(
+            'Order Purchases',
+            Defaults('Order Purchases'),
+            {
+                'Order Date':Today(),
+            'User Name':lVarSelUser.'First Name'&""&lVarSelUser.'Last Name',
+            'User ID':placeOrderComboBox.Selected,
+                Tot: With(
+                   {
+                        ST: Sum(
+                           colProductOrder,
+                           (price *Quantity)
+                        )
+                  },
+                   Value(ST+ 10 + 50,"Rs#,##00")
+                )
+            }
+        )
+    }
+);
+ForAll(
+    colProductOrder,
+    Patch(
+        Orders,
+        Defaults(Orders),
+        {
+            
+            Quantity:ThisRecord.Quantity,
+           Username:lVarSelUser.'First Name'&""&lVarSelUser.'Last Name',
+           Total:ThisRecord.price,
+            Address:lVarSelUser.Address,
+            'Product Name': ThisRecord.ProductName,
+            'Order Date':Today(),
+            'User ID ':lVarOrd.'User ID',
+            'Product ID':lVarOrd.'Product ID',
+            image:ThisRecord.Image,
+            'Order ID All':lVarOrd.'Order ID'
+        }
+    )
+);UpdateContext({lVarConfirmOrder:true});
