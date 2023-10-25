@@ -1,0 +1,41 @@
+UpdateContext(
+    {
+        lVarSelUser: LookUp(
+            'User Details',
+            'Email ID'= txtEmailIds.Text And Password = txtAdmPswd.Text
+        )
+           }
+);
+If(
+    lVarSelUser.Password = txtAdmPswd.Text,
+    Set(
+        gVarSel,
+        lVarSelUser.'User Type'
+    )
+);
+If(
+    IsBlank(lVarSelUser),
+    Notify(
+        "Please Enter Valid Credentails",
+        NotificationType.Error,
+        1500
+    ),Set(lVarSelUser,lVarSelUser);
+    Switch(
+        gVarSel,
+        chsUserType.User,
+        Navigate(
+            scrProducts,
+            ScreenTransition.None
+        ),
+        chsUserType.Admin,
+        Navigate(
+            scrTab,
+            ScreenTransition.None
+        ),
+        Notify(
+            "Please validate the provided Details",
+            NotificationType.Error,
+            2000
+        )
+    )
+)
