@@ -1,0 +1,5 @@
+//Add Quantity
+Patch(colProductOrder, LookUp(colProductOrder, ProductName = ThisItem.ProductName), {Quantity: ThisItem.Quantity - 1});
+
+//Decrease Quantity
+ Patch(colProductOrder, LookUp(colProductOrder, ProductName = ThisItem.ProductName), {Quantity: ThisItem.Quantity + 1})
